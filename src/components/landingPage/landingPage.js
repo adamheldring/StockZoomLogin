@@ -1,6 +1,6 @@
 import React from "react"
 
-class App extends React.Component {
+class LandingPage extends React.Component {
 
 state = {
   password: "berkshirehathaway2018",
@@ -92,4 +92,4 @@ render() {
 
 }
 
-export default App
+export default LandingPage
