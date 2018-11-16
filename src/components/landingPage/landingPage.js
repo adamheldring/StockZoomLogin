@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 class LandingPage extends React.Component {
 
@@ -7,6 +8,19 @@ state = {
   email: "warren.buffet@willandskill.se",
   loggedin: false,
   portfolioList: []
+}
+
+componentDidMount() {
+  if (sessionStorage.getItem("usertoken")) {
+      this.getPortfolioList()
+      this.setState({
+        loggedin: true
+      })
+    console.log('There is a token')
+  } else {
+    console.log('There is NO token')
+  }
+
 }
 
 handleChange = e => {
@@ -29,8 +43,7 @@ loginUser = e => {
 
   fetch("https://beta.stockzoom.com/api-token-auth/", {
     headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
+      "Content-Type": "application/json"
     },
     method: "post",
     body: JSON.stringify(user)
@@ -65,17 +78,21 @@ getPortfolioList = () => {
 render() {
   const { email, password, loggedin, portfolioList} = this.state
   return (
-    <div className="mainWrapper">
-      {loggedin ?
+    <div className="landingWrapper">
+      {(portfolioList.length > 0) ?
         <div className="myPageView">
-          <h1>WELCOME {portfolioList[0].user.first_name.toUpperCase()}</h1>
+          <h1>MY STOCKS PAGE</h1>
+          <h2>WELCOME {portfolioList[0].user.first_name.toUpperCase()}</h2>
           <h2>PORTFOLIO STATUS:</h2>
-          {portfolioList && portfolioList.map(listing => {
-            return <p>{listing.id}</p>
+          {portfolioList && portfolioList.map((listing, index) => {
+            return (
+              <Link key={index} to={`/portfolios/${listing.id}`}>
+                <p>
+                  Portfolio {listing.id} with {listing.position.length} positions
+                </p>
+              </Link>
+            )
           })}
-
-
-
         </div>
         :
         <div className="formContainer formContainer--signin">
