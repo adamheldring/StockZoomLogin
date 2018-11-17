@@ -39,9 +39,11 @@ a {
     border-radius: 5px;
   }
 }
+
 .navBack {
   color: #FFF;
 }
+
 .signinForm {
   display: flex;
   flex-direction: column;
@@ -53,6 +55,7 @@ a {
   align-items: center;
   color: #fff;
 }
+
 .portfolioList-container {
   background: #FEFEFE;
   padding: 10px;
@@ -65,6 +68,7 @@ a {
     padding: 0px 40px;
   }
 }
+
 .position-container {
   background: #FEFEFE;
   color: #000;
@@ -88,17 +92,50 @@ a {
     text-align: center;
     width: 50%;
   }
+
   .trendArrow {
     margin-top: 20px;
     width: 80px;
     height: auto;
   }
 }
+
 .portfolioListing {
   background: lightgrey;
   padding: 1px 10px;
   margin-bottom: 10px;
 }
+
 .portfolioListing:hover {
   background: lightblue;
+}
+
+@media (max-width: 600px) {
+  .mainWrapper {
+    width: 90%;
+  }
+
+  .mainHeading {
+    font-size: 50px;
+  }
+
+  .input {
+    width: 250px;
+  }
+
+  .value-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .portfolioList-container--single {
+    padding: 0 20px;
+  }
+
+  .position-container {
+    .trendArrow-container {
+      width: 100%;
+    }
+  }
+  
 }
