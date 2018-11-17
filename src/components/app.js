@@ -8,15 +8,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router className="mainWrapper">
-        <div>
+      <div className="mainWrapper">
+        <Router>
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route path="/portfolios/:id" component={SinglePortfolio} />
             <Route component={NotFound} />
           </Switch>
-        </div>
       </Router>
+    </div>
     )
   }
 

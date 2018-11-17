@@ -1,9 +1,42 @@
+a {
+  text-decoration: none;
+}
+
 .body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
 
+.mainWrapper {
+  width: 600px;
+  margin: 100px auto 0;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  background: lightgrey;
+}
+
 .mainHeading {
-  font-size: 200px
+  margin: 0;
+  font-size: 100px
+}
+
+// .formContainer {
+//   background: lightblue;
+// }
+
+.input {
+  border: 1px solid darkgrey;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  &__button {
+    margin: 10px 0;
+  }
+}
+
+.signinForm {
+  display: flex;
+  flex-direction: column;
 }
