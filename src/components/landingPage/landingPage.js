@@ -78,21 +78,25 @@ logout = () => {
 render() {
   const { email, password, portfolioList} = this.state
   return (
-    <div className="landingWrapper">
+    <div>
       {(portfolioList.length > 0) ?
         <div className="myPageView">
           <h1 className="mainHeading">MY PAGE</h1>
           <h2>WELCOME {portfolioList[0].user.first_name.toUpperCase()}</h2>
-          <h4>{`YOU HAVE ${portfolioList.length} PORTFOLIOS`}</h4>
-          {portfolioList && portfolioList.map((listing, index) => {
-            return (
-              <Link key={index} to={`/portfolios/${listing.id}`}>
-                <p>
-                  Portfolio {listing.id} with {listing.position.length} positions
-                </p>
-              </Link>
-            )
-          })}
+          <div className="portfolioList-container">
+            <h4>{`YOU HAVE ${portfolioList.length} PORTFOLIOS`}</h4>
+            {portfolioList && portfolioList.map((listing, index) => {
+              return (
+                <Link key={index} to={`/portfolios/${listing.id}`}>
+                  <div className="portfolioListing">
+                    <p>
+                      Portfolio {String.fromCharCode(65 + index)} with {listing.position.length} positions
+                    </p>
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
           <button className="input input__button" onClick={this.logout} type="button">Log out</button>
         </div>
         : <div className="formContainer">

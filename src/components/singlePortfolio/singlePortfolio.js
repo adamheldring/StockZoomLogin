@@ -26,62 +26,64 @@ getSinglePortfolio = () => {
       }, () => console.log("Portfolio: ", this.state.portfolioPositions))
       console.log("Result from DB: ", userData)
     })
-    .catch((err) => {
+    .catch(err => {
       console.log("Reqeust failure: ", err)
     })
 }
 
-  render() {
-    const { portfolioPositions, availableCash, currency } = this.state
-    return (
-      <div>
-        <Link to="/"><h2>&#8592; GO BACK</h2></Link>
-        <h2>PORTFOLIO {this.props.match.params.id}</h2>
-        <p>Available Cash: { availableCash && `${parseInt(availableCash)} ${currency}`}</p>
-        <h3>Positions:</h3>
-        {portfolioPositions.length > 0 ?
-          (<div>
-            {portfolioPositions.map((position, index) => (
-              <div key={index}>
-                <h4>{position.instrument.name}</h4>
-                <p>PRICE:</p>
-                <ul>
-                  <li>
-                    Today: {position.instrument.price_today}{" "}
-                    {position.instrument.currency}
-                  </li>
-                  <li>
-                    Opening: {position.instrument.price_open}{" "}
-                    {position.instrument.currency}
-                  </li>
-                  <li>
-                    High: {position.instrument.price_high}{" "}
-                    {position.instrument.currency}
-                  </li>
-                  <li>
-                    Low: {position.instrument.price_low}{" "}
-                    {position.instrument.currency}
-                  </li>
-                  <li>
-                    Closing: {position.instrument.price_close}{" "}
-                    {position.instrument.currency}
-                  </li>
-                </ul>
-                <p>Kind: {position.instrument.kind}</p>
-                <p>Rating: {position.instrument.rating}</p>
+render() {
+  const { portfolioPositions, availableCash, currency } = this.state
+  return (
+    <div className="myPageView">
+      <Link to="/"><h4 className="navBack">&#8592; GO BACK</h4></Link>
+      <h2>PORTFOLIO DETAILS</h2>
+      <h4>ID: {this.props.match.params.id}</h4>
+      <h4>Available Cash: { availableCash && `${parseInt(availableCash)} ${currency}`}</h4>
+      <h3>Positions:</h3>
+      {portfolioPositions.length > 0 ?
+        (<div className="portfolioList-container--single">
+          {portfolioPositions.map((position, index) => (
+            <div key={index} className="position-container">
+              <h4>{position.instrument.name}</h4>
+              <p>PRICE:</p>
+              <ul>
+                <li>
+                  Today: {position.instrument.price_today}{" "}
+                  {position.instrument.currency}
+                </li>
+                <li>
+                  Opening: {position.instrument.price_open}{" "}
+                  {position.instrument.currency}
+                </li>
+                <li>
+                  High: {position.instrument.price_high}{" "}
+                  {position.instrument.currency}
+                </li>
+                <li>
+                  Low: {position.instrument.price_low}{" "}
+                  {position.instrument.currency}
+                </li>
+                <li>
+                  Closing: {position.instrument.price_close}{" "}
+                  {position.instrument.currency}
+                </li>
+              </ul>
+              <p>Kind: {position.instrument.kind}</p>
+              <p>Rating: {position.instrument.rating}</p>
 
-                <p>
-                  {position.instrument.company &&
-                    position.instrument.company.description}
-                </p>
-                </div>))}
-              </div>)
-              :
-          (<p>Loading...</p>)
-        }
-      </div>
-    )
-  }
+              <p>
+                {position.instrument.company &&
+                  position.instrument.company.description}
+              </p>
+            </div>
+          ))}
+        </div>)
+        :
+        (<p>Loading...</p>)
+      }
+    </div>
+  )
+}
 
 }
 
