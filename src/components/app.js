@@ -15,8 +15,8 @@ class App extends React.Component {
             <Route path="/portfolios/:id" component={SinglePortfolio} />
             <Route component={NotFound} />
           </Switch>
-      </Router>
-    </div>
+        </Router>
+      </div>
     )
   }
 

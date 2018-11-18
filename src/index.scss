@@ -38,6 +38,11 @@ a {
     margin: 10px 0;
     border-radius: 5px;
   }
+  &__field {
+    &--refusedLogin {
+      color: red;
+    }
+  }
 }
 
 .navBack {
@@ -69,8 +74,17 @@ a {
   }
 }
 
+.singlePortfolioOverview {
+  background: lightgrey;
+  box-shadow: 5px 10px 30px #272727;
+  padding: 5px 15px;
+  margin: 20px 0;
+  color: #000;
+}
+
 .position-container {
   background: #FEFEFE;
+  box-shadow: 5px 10px 30px #272727;
   color: #000;
   padding: 5px 15px;
   margin-bottom: 20px;
@@ -137,5 +151,4 @@ a {
       width: 100%;
     }
   }
-  
 }
