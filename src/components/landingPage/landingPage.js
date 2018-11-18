@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 class LandingPage extends React.Component {
 
 state = {
-  password: "berkshirehathaway2018",
+  password: "",
   email: "warren.buffet@willandskill.se",
   portfolioList: [],
   refusedLogin: false
@@ -73,65 +73,69 @@ logout = () => {
 
 render() {
   const { email, password, portfolioList, refusedLogin } = this.state
-  return (
-    <div>
-      {(portfolioList.length > 0)
-        ? (
-          <div className="myPageView">
-            <h1 className="mainHeading">MY PAGE</h1>
-            <h2>
-              WELCOME
-              {" "}
-              {portfolioList[0].user.first_name.toUpperCase()}
-            </h2>
-            <div className="portfolioList-container">
-              <h4>{`YOU HAVE ${portfolioList.length} PORTFOLIOS`}</h4>
-              {portfolioList && portfolioList.map((listing, index) => (
-                <Link key={index} to={`/portfolios/${listing.id}`}>
-                  <div className="portfolioListing">
-                    <p>
-                      Portfolio
-                      {" "}
-                      {String.fromCharCode(65 + index)}
-                      {" "}
-                      with
-                      {" "}
-                      {listing.position.length}
-                      {" "}
-                      positions
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            <button className="input input__button" onClick={this.logout} type="button">Log out</button>
-          </div>)
-        : (
-          <div className="formContainer">
-            <h1 className="mainHeading">LOGIN</h1>
-            <form name="loginForm" className="signinForm" onSubmit={this.loginUser}>
-              <input
-                className={refusedLogin ? "input input__field--refusedLogin" : "input input__field"}
-                type="email"
-                name="email"
-                value={email}
-                placeholder="E-mail"
-                onChange={this.handleChange}
-                required />
-              <input
-                className={refusedLogin ? "input input__field--refusedLogin" : "input input__field"}
-                type="password"
-                name="password"
-                value={password}
-                placeholder="Password"
-                onChange={this.handleChange}
-                required />
-              <button className="input input__button" type="submit">Login</button>
-            </form>
-          </div>)
-      }
-    </div>
-  )
+  if (sessionStorage.getItem("usertoken")) {
+    return (
+      <div>
+        {(portfolioList.length > 0)
+          ? (
+            <div className="myPageView">
+              <h1 className="mainHeading">MY PAGE</h1>
+              <h2>
+                WELCOME
+                {" "}
+                {portfolioList[0].user.first_name.toUpperCase()}
+              </h2>
+              <div className="portfolioList-container">
+                <h4>{`YOU HAVE ${portfolioList.length} PORTFOLIOS`}</h4>
+                {portfolioList && portfolioList.map((listing, index) => (
+                  <Link key={index} to={`/portfolios/${listing.id}`}>
+                    <div className="portfolioListing">
+                      <p>
+                        Portfolio
+                        {" "}
+                        {String.fromCharCode(65 + index)}
+                        {" "}
+                        with
+                        {" "}
+                        {listing.position.length}
+                        {" "}
+                        positions
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <button className="input input__button" onClick={this.logout} type="button">Log out</button>
+            </div>)
+          : <div className="myPageView"><p>Loading...</p></div>
+        }
+      </div>
+    )
+  } else {
+    return (
+      <div className="formContainer">
+        <h1 className="mainHeading">LOGIN</h1>
+        <form name="loginForm" className="signinForm" onSubmit={this.loginUser}>
+          <input
+            className={refusedLogin ? "input input__field--refusedLogin" : "input input__field"}
+            type="email"
+            name="email"
+            value={email}
+            placeholder="E-mail"
+            onChange={this.handleChange}
+            required />
+          <input
+            className={refusedLogin ? "input input__field--refusedLogin" : "input input__field"}
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Password"
+            onChange={this.handleChange}
+            required />
+          <button className="input input__button" type="submit">Login</button>
+        </form>
+      </div>)
+  }
 }
 
 }
